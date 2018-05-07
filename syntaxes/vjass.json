@@ -152,6 +152,16 @@
 			"patterns": [{ "include": "$self" }]
 		},
 		{
+			"begin": "\\b(class)\\s+([$\\w_$]+)",
+			"end": "\\bendclass\\b",
+			"captures": {
+				"1": { "name": "keyword.vjass" },
+				"2": { "name": "entity.name.section" }
+			},
+			"endCaptures": { "0": { "name": "keyword.vjass" } },
+			"patterns": [{ "include": "$self" }]
+		},
+		{
 			"begin": "\\b(module)\\s+([$\\w_$]+)",
 			"end": "\\bendmodule\\b",
 			"captures": {
@@ -221,7 +231,7 @@
 		{
 			"name": "keyword.other.vjass",
 
-			"match": "\\b(define|enddefine|globals|endglobals|function|endfunction|takes|returns|keyword|local|set|call|delegate|initializer|uses|needs|requires|interface|endinterface|scope|endscope|library|library_once|endlibrary|struct|endstruct|method|endmethod|operator|module|endmodule|implement|optinal)\\b"
+			"match": "\\b(define|enddefine|globals|endglobals|function|endfunction|takes|returns|keyword|local|set|call|delegate|initializer|uses|needs|requires|interface|endinterface|scope|endscope|class|endclass|library|library_once|endlibrary|struct|endstruct|method|endmethod|operator|module|endmodule|implement|optinal)\\b"
 		},
 
 		{
