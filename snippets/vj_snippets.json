@@ -80,6 +80,24 @@
 		"body": "function ${1:function_name} takes ${2:nothing} returns ${3:nothing}\n\t${0:// body}\nendfunction",
 		"description": "function",
 		"scope": "source.vjass"
+    },
+    "void": {
+		"prefix": "void",
+		"body": "void ${1:funcName}() {\n\t\n}",
+		"description": "function",
+		"scope": "source.vjass"
+    },
+    "scope": {
+		"prefix": "scope",
+		"body": "scope ${1:ScopeName} fast {\n\tinit {\n\t\n\t}\n}",
+		"description": "scope",
+		"scope": "source.vjass"
+    },
+    "library": {
+		"prefix": "library",
+		"body": "library ${1:LibName} fast {\n\tinit {\n\t\n\t}\n}",
+		"description": "library",
+		"scope": "source.vjass"
 	},
 	"function": {
 		"prefix": "function",
@@ -111,16 +129,16 @@
         "description": "struct",
         "scope": "source.vjass"
     },
+    "class": {
+        "prefix": "class",
+        "body": "class ${1:ClassName} {\n\tonCreate() {\n\tstart\n\n\tend\n\t}\n}",
+        "description": "class",
+        "scope": "source.vjass"
+    },
     "method": {
         "prefix": "method",
         "body": "method ${1:method_name} takes ${2:nothing} returns ${3:nothing}\n\t${0:// body}\nendmethod",
         "description": "method",
-        "scope": "source.vjass"
-    },
-    "library": {
-        "prefix": "library",
-        "body": "library ${1:library_name} initializer ${2:init_function} requires ${3:require_libs}\n\tprivate function ${2:initializer_name} takes nothing returns nothing\n\t\t${0:// init_body}\n\tendfunction\nendlibrary\n",
-        "description": "library",
         "scope": "source.vjass"
     },
     "callDebug":{

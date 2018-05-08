@@ -69,5 +69,10 @@
 		"jsdom": "^11.3.0",
 		"tmp": "0.0.33",
 		"vscode-ripgrep": "^0.7.1-patch.1.5"
+	},
+	"__metadata": {
+		"id": "03c89e4c-6bb3-43af-841b-8268d875c114",
+		"publisherDisplayName": "FakedWeiss",
+		"publisherId": "12023217-c3cb-48d6-9a4c-dc550af721f4"
 	}
 }

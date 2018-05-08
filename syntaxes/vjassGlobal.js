@@ -32,6 +32,7 @@ var regPatterns = [
     '(library)' + namePattern,
     '(interface function)' + namePattern,
     '(hashtable|integer|real|boolean|string|handle|agent|event|player|widget|unit|destructable|item|ability|buff|force|group|trigger|triggercondition|triggeraction|timer|location|region|rect|boolexpr|sound|conditionfunc|filterfunc|unitpool|itempool|race|alliancetype|racepreference|gamestate|igamestate|fgamestate|playerstate|playerscore|playergameresult|unitstate|aidifficulty|eventid|gameevent|playerevent|playerunitevent|unitevent|limitop|widgetevent|dialogevent|unittype|gamespeed|gamedifficulty|gametype|mapflag|mapvisibility|mapsetting|mapdensity|mapcontrol|playerslotstate|volumegroup|camerafield|camerasetup|playercolor|placement|startlocprio|raritycontrol|blendmode|texmapflags|effect|effecttype|weathereffect|terraindeformation|fogstate|fogmodifier|dialog|button|quest|questitem|defeatcondition|timerdialog|leaderboard|multiboard|multiboarditem|trackable|gamecache|version|itemtype|texttag|attacktype|damagetype|weapontype|soundtype|lightning|pathingtype|image|ubersplat)(?:(\\s+array)*)' + namePattern,
+    '(class)' + namePattern,
 ];
 
 exports.searchPatterns = [
@@ -41,11 +42,12 @@ exports.searchPatterns = [
     { kind: vscode.SymbolKind.Module, pattern: /\b/.source + regPatterns[3] },
     { kind: vscode.SymbolKind.Interface, pattern: /\b/.source + regPatterns[4] + /\s+/.source },
     { kind: vscode.SymbolKind.Variable, pattern: /\b/.source + regPatterns[5] },
+    { kind: vscode.SymbolKind.Struct, pattern: /\b/.source + regPatterns[6] },
 ];
 
 
 
-exports.symbolPattern = /\b/.source + '(' + regPatterns[0] + '|' + regPatterns[1] + '|' + regPatterns[2] + '|' + regPatterns[3] + '|' + regPatterns[4] + '|' + regPatterns[5] + ')' + /\s+/.source;
+exports.symbolPattern = /\b/.source + '(' + regPatterns[0] + '|' + regPatterns[1] + '|' + regPatterns[2] + '|' + regPatterns[3] + '|' + regPatterns[4] + '|' + regPatterns[5] + '|' + regPatterns[6] + ')' + /\s+/.source;
 
 
 exports.cjfunctions = {
@@ -6273,6 +6275,115 @@ exports.cjfunctions = {
             { label: 'real', name: 'x', documentation: "real variables can hold rational numbers" },
             { label: 'real', name: 'y', documentation: "real variables can hold rational numbers" },
             { label: 'string', name: 'message', documentation: "strings variables hold a series of characters" },
+      ],
+    
+    },
+    printTo: {
+        completion: "fast printTo takes string text, player gottenPlayer returns nothing",
+        completion: "библиотека fast, функция принимает string текст_для_отображения и player игрок_которому_отобразить",
+        description: "",
+        parameters: [
+            { label: 'string', name: 'text', documentation: "текст для отображения" },
+            { label: 'player', name: 'gottenPlayer', documentation: "игрок которому выводим текст" },
+      ],
+    
+    },
+    print: {
+        completion: "fast print takes string text returns nothing",
+        completion: "библиотека fast, функция принимает string текст_для_отображения",
+        description: "",
+        parameters: [ { label: 'string', name: 'text', documentation: "текст для отображения" }, ],   
+    },
+
+    move: {
+        completion: "fast move takes unit target, float offset returns nothing",
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит и float смещение_в_юнитах",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'offset', documentation: "смещение в юнитах" },
+        ],
+    },
+
+    moveAt: {
+        completion: "fast moveAt takes unit target, float x, float y returns nothing",
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит, координату x и координату y",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'x', documentation: "координата x" },
+            { label: 'float', name: 'y', documentation: "координата y" },
+        ],
+    },
+
+    damage: {
+        completion: "fast damage takes unit source, unit target, float damageAmount returns nothing",
+        completion: "библиотека fast, функция принимает unit источник_урона, unit цель_урона, float количество_урона",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'source', documentation: "источник урона" },
+            { label: 'unit', name: 'target', documentation: "цель_урона" },
+            { label: 'float', name: 'damageAmount', documentation: "количество урона" },
+        ],
+    },
+
+    damageAllEnemies: {
+        completion: "fast damage takes unit source, float x, float y, float radius, float damageAmount returns nothing",
+        completion: "библиотека fast, функция принимает unit источник_урона, float координата_центра_окружности_x, float координата_центра_окружности_y float радиус_окружности, float количество_урона",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'source', documentation: "источник урона" },
+            { label: 'float', name: 'x', documentation: "координата x" },
+            { label: 'float', name: 'y', documentation: "координата y" },
+            { label: 'float', name: 'radius', documentation: "радиус" },
+            { label: 'float', name: 'damageAmount', documentation: "количество урона" },
+        ],
+    },
+
+    addUnitEvent: {
+        completion: "fast addUnitEvent takes trigger t, playerunitevent event returns nothing",
+        completion: "библиотека fast, функция принимает trigger триггер_которому_добавить_событие и playerunitevent событие_юнита",
+        description: "",
+        parameters: [
+            { label: 'trigger', name: 'targetTrigger', documentation: "целейвой триггер" },
+            { label: 'playerunitevent', name: 'unitEvent', documentation: "событие юнита" },
+      ],
+    
+    },
+    addAction: {
+        completion: "fast addAction takes trigger t, function actFunction returns nothing",
+        completion: "библиотека fast, функция принимает trigger триггер_которому_добавить_действие и function ссылку на функцию",
+        description: "",
+        parameters: [
+            { label: 'trigger', name: 'targetTrigger', documentation: "текст для отображения" },
+            { label: 'function', name: 'actFunction', documentation: "ссылка на функцию" },
+      ],
+    
+    },
+    newTrigger: {
+        completion: "fast newTrigger takes nothing returns nothing",
+        completion: "библиотека fast, функция создает триггер",
+        description: "",
+    },
+    cast: {
+        completion: "cast spell",
+        completion: "создает объект и вызывает метод onCreate",
+        description: "",
+    },
+    getCaster: {
+        completion: "getCaster",
+        completion: "получаем кастера примененной в триггере способности",
+        description: "",
+    },
+    getSpellId: {
+        completion: "получаем id примененной в триггере способности",
+        description: "",
+    },
+    getOwner: {
+        completion: "функция принимает unit юнит_владельца_которого_мы_хотим_узнать и возвращает нам player владелец_этого_юнита",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'whichUnit' }
       ],
     
     },
@@ -13817,6 +13928,11 @@ exports.constants = {
         description: "",
 
     },
+    EVENT_UNIT_USED_SPELL: {
+        completion: "constant playerunitevent EVENT_PLAYER_UNIT_SPELL_EFFECT=ConvertPlayerUnitEvent(274)",
+        description: "",
+
+    },
     EVENT_PLAYER_UNIT_SPELL_FINISH: {
         completion: "constant playerunitevent EVENT_PLAYER_UNIT_SPELL_FINISH=ConvertPlayerUnitEvent(275)",
         description: "",
@@ -15797,12 +15913,15 @@ exports.constants = {
 exports.keywords = {
     globals: { description: "" },
     endglobals: { description: "" },
-    library: { description: "" },
     endlibrary: { description: "" },
     struct: { description: "" },
     endstruct: { description: "" },
     onCreate: { description: "" },
-    scope: { description: "" },
+    start: { description: "" },
+    func: { description: "" },
+    end: { description: "" },
+    with: { description: "" },
+    init: { description: "" },
     endscope: { description: "" },
     method: { description: "" },
     endmethod: { description: "" },
@@ -15823,7 +15942,6 @@ exports.keywords = {
     returns: { description: "" },
     return: { description: "" },
     local: { description: "" },
-    call: { description: "" },
     set: { description: "" },
     true: { description: "" },
     false: { description: "" },
@@ -15845,11 +15963,14 @@ exports.keywords = {
     defaults: { description: "" },
     operator: { description: "" },
     debug: { description: "" },
-    hashtable: { description: "" },integer: { description: "" },real: { description: "" },boolean: { description: "" },string: { description: "" },handle: { description: "" },agent: { description: "" },event: { description: "" },player: { description: "" },widget: { description: "" },unit: { description: "" },destructable: { description: "" },item: { description: "" },ability: { description: "" },buff: { description: "" },force: { description: "" },group: { description: "" },trigger: { description: "" },triggercondition: { description: "" },triggeraction: { description: "" },timer: { description: "" },location: { description: "" },region: { description: "" },rect: { description: "" },boolexpr: { description: "" },sound: { description: "" },conditionfunc: { description: "" },filterfunc: { description: "" },unitpool: { description: "" },itempool: { description: "" },race: { description: "" },alliancetype: { description: "" },racepreference: { description: "" },gamestate: { description: "" },igamestate: { description: "" },fgamestate: { description: "" },playerstate: { description: "" },playerscore: { description: "" },playergameresult: { description: "" },unitstate: { description: "" },aidifficulty: { description: "" },eventid: { description: "" },gameevent: { description: "" },playerevent: { description: "" },playerunitevent: { description: "" },unitevent: { description: "" },limitop: { description: "" },widgetevent: { description: "" },dialogevent: { description: "" },unittype: { description: "" },gamespeed: { description: "" },gamedifficulty: { description: "" },gametype: { description: "" },mapflag: { description: "" },mapvisibility: { description: "" },mapsetting: { description: "" },mapdensity: { description: "" },mapcontrol: { description: "" },playerslotstate: { description: "" },volumegroup: { description: "" },camerafield: { description: "" },camerasetup: { description: "" },playercolor: { description: "" },placement: { description: "" },startlocprio: { description: "" },raritycontrol: { description: "" },blendmode: { description: "" },texmapflags: { description: "" },effect: { description: "" },effecttype: { description: "" },weathereffect: { description: "" },terraindeformation: { description: "" },fogstate: { description: "" },fogmodifier: { description: "" },dialog: { description: "" },button: { description: "" },quest: { description: "" },questitem: { description: "" },defeatcondition: { description: "" },timerdialog: { description: "" },leaderboard: { description: "" },multiboard: { description: "" },multiboarditem: { description: "" },trackable: { description: "" },gamecache: { description: "" },version: { description: "" },itemtype: { description: "" },texttag: { description: "" },attacktype: { description: "" },damagetype: { description: "" },weapontype: { description: "" },soundtype: { description: "" },lightning: { description: "" },pathingtype: { description: "" },image: { description: "" },ubersplat: { description: "" },nothing: { description: "" },
+    hashtable: { description: "" },integer: { description: "" }, bool: { description: "" }, float: { description: "" }, int: { description: "" }, str: { description: "" },real: { description: "" },boolean: { description: "" },string: { description: "" },handle: { description: "" },agent: { description: "" },event: { description: "" },player: { description: "" },widget: { description: "" },unit: { description: "" },destructable: { description: "" },item: { description: "" },ability: { description: "" },buff: { description: "" },force: { description: "" },group: { description: "" },trigger: { description: "" },triggercondition: { description: "" },triggeraction: { description: "" },timer: { description: "" },location: { description: "" },region: { description: "" },rect: { description: "" },boolexpr: { description: "" },sound: { description: "" },conditionfunc: { description: "" },filterfunc: { description: "" },unitpool: { description: "" },itempool: { description: "" },race: { description: "" },alliancetype: { description: "" },racepreference: { description: "" },gamestate: { description: "" },igamestate: { description: "" },fgamestate: { description: "" },playerstate: { description: "" },playerscore: { description: "" },playergameresult: { description: "" },unitstate: { description: "" },aidifficulty: { description: "" },eventid: { description: "" },gameevent: { description: "" },playerevent: { description: "" },playerunitevent: { description: "" },unitevent: { description: "" },limitop: { description: "" },widgetevent: { description: "" },dialogevent: { description: "" },unittype: { description: "" },gamespeed: { description: "" },gamedifficulty: { description: "" },gametype: { description: "" },mapflag: { description: "" },mapvisibility: { description: "" },mapsetting: { description: "" },mapdensity: { description: "" },mapcontrol: { description: "" },playerslotstate: { description: "" },volumegroup: { description: "" },camerafield: { description: "" },camerasetup: { description: "" },playercolor: { description: "" },placement: { description: "" },startlocprio: { description: "" },raritycontrol: { description: "" },blendmode: { description: "" },texmapflags: { description: "" },effect: { description: "" },effecttype: { description: "" },weathereffect: { description: "" },terraindeformation: { description: "" },fogstate: { description: "" },fogmodifier: { description: "" },dialog: { description: "" },button: { description: "" },quest: { description: "" },questitem: { description: "" },defeatcondition: { description: "" },timerdialog: { description: "" },leaderboard: { description: "" },multiboard: { description: "" },multiboarditem: { description: "" },trackable: { description: "" },gamecache: { description: "" },version: { description: "" },itemtype: { description: "" },texttag: { description: "" },attacktype: { description: "" },damagetype: { description: "" },weapontype: { description: "" },soundtype: { description: "" },lightning: { description: "" },pathingtype: { description: "" },image: { description: "" },ubersplat: { description: "" },nothing: { description: "" },
 }
 
 exports.vjfunctions = {
     create: {
+        description: "Struct.create()"
+    },
+    onCreate: {
         description: "Struct.create()"
     },
     allocate: {
