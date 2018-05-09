@@ -6288,11 +6288,29 @@ exports.cjfunctions = {
       ],
     
     },
+    getSendedTimer: {
+        completion: "получаем объект Timer gottenTimer в функции которая вызывалась таймером Timer.start()",
+        description: "",
+    },
+    start: {
+        completion: "fast printTo takes string text, player gottenPlayer returns nothing",
+        completion: "библиотека fast, функция принимает string текст_для_отображения и player игрок_которому_отобразить",
+        description: "",
+        parameters: [
+            { label: 'string', name: 'text', documentation: "текст для отображения" },
+            { label: 'player', name: 'gottenPlayer', documentation: "игрок которому выводим текст" },
+        ],
+    },
+
     print: {
         completion: "fast print takes string text returns nothing",
         completion: "библиотека fast, функция принимает string текст_для_отображения",
         description: "",
         parameters: [ { label: 'string', name: 'text', documentation: "текст для отображения" }, ],   
+    },
+    stop: {
+        completion: "останавливаем таймер",
+        description: "",   
     },
 
     move: {
@@ -6363,6 +6381,26 @@ exports.cjfunctions = {
     newTrigger: {
         completion: "fast newTrigger takes nothing returns nothing",
         completion: "библиотека fast, функция создает триггер",
+        description: "",
+    },
+    newGroup: {
+        completion: "функция создает группу",
+        description: "",
+    },
+    getX: {
+        completion: "функция принимает unit чью_координату_х_надо_взять и возвращает float полученная_координата_x",
+        description: "",
+    },
+    getY: {
+        completion: "функция принимает unit чью_координату_y_надо_взять и возвращает float полученная_координата_y",
+        description: "",
+    },
+    select: {
+        completion: "функция принимает unit кого_надо_выбрать",
+        description: "",
+    },
+    unselect: {
+        completion: "функция принимает unit кого_надо_убрать_из_выбора",
         description: "",
     },
     cast: {
@@ -15915,11 +15953,13 @@ exports.keywords = {
     endglobals: { description: "" },
     endlibrary: { description: "" },
     struct: { description: "" },
+    sendedObj: { description: "" },
     endstruct: { description: "" },
     onCreate: { description: "" },
     start: { description: "" },
     func: { description: "" },
     end: { description: "" },
+    begin: { description: "" },
     with: { description: "" },
     init: { description: "" },
     endscope: { description: "" },

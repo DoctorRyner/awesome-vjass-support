@@ -89,7 +89,7 @@
     },
     "scope": {
 		"prefix": "scope",
-		"body": "scope ${1:ScopeName} fast {\n\tinit {\n\t\n\t}\n}",
+		"body": "scope ${1:ScopeName} fast {\n\tinit {\n\t\t\n\t}\n}",
 		"description": "scope",
 		"scope": "source.vjass"
     },
@@ -131,7 +131,7 @@
     },
     "class": {
         "prefix": "class",
-        "body": "class ${1:ClassName} {\n\tonCreate() {\n\tstart\n\n\tend\n\t}\n}",
+        "body": "class ${1:ClassName} {\n\tonCreate() {\n\t\tbegin\n\t\t\n\t\tend\n\t}\n}",
         "description": "class",
         "scope": "source.vjass"
     },
