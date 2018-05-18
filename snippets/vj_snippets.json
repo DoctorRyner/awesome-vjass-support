@@ -95,7 +95,7 @@
     },
     "init": {
 		"prefix": "init",
-		"body": "init {\n\t\n}\n}",
+		"body": "init {\n\t\n}",
 		"description": "scope",
 		"scope": "source.vjass"
     },

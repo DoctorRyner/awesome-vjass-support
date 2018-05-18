@@ -6313,8 +6313,8 @@ exports.cjfunctions = {
         description: "",   
     },
 
-    move: {
-        completion: "fast move takes unit target, float offset returns nothing",
+    moveForward: {
+        completion: "fast moveForward takes unit target, float offset returns nothing",
         completion: "библиотека fast, функция принимает unit перемещаемый_юнит и float смещение_в_юнитах",
         description: "",
         parameters: [
@@ -6333,7 +6333,15 @@ exports.cjfunctions = {
             { label: 'float', name: 'y', documentation: "координата y" },
         ],
     },
-
+    moveToward: {
+        completion: "fast moveToward takes unit target, float offset, float angle returns nothing",
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит, float смешение, float угол направления",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'offset', documentation: "смещение" },
+            { label: 'float', name: 'angle', documentation: "угол направления" },
+        ],
+    },
     damage: {
         completion: "fast damage takes unit source, unit target, float damageAmount returns nothing",
         completion: "библиотека fast, функция принимает unit источник_урона, unit цель_урона, float количество_урона",
@@ -6344,7 +6352,6 @@ exports.cjfunctions = {
             { label: 'float', name: 'damageAmount', documentation: "количество урона" },
         ],
     },
-
     damageAllEnemies: {
         completion: "fast damage takes unit source, float x, float y, float radius, float damageAmount returns nothing",
         completion: "библиотека fast, функция принимает unit источник_урона, float координата_центра_окружности_x, float координата_центра_окружности_y float радиус_окружности, float количество_урона",
@@ -15976,9 +15983,10 @@ exports.keywords = {
     start: { description: "" },
     func: { description: "" },
     end: { description: "" },
-    begin: { description: "" },
+    custom: { description: "" },
+    endcustom: { description: "" },
+    onCreateCustom: { description: "" },
     with: { description: "" },
-    init: { description: "" },
     endscope: { description: "" },
     method: { description: "" },
     endmethod: { description: "" },
@@ -16015,6 +16023,7 @@ exports.keywords = {
     uses: { description: "" },
     initializer: { description: "" },
     public: { description: "" },
+    just: { description: "" },
     private: { description: "" },
     static: { description: "" },
     defaults: { description: "" },

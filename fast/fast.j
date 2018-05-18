@@ -112,16 +112,31 @@ endlibrary
 // end timer lib
 
 // cJass lib declaration 
-#include "cj_types_priv.j"
+include "cj_types_priv.j"
+include "cj_antibj_base.j"
 
-define class = struct
+define class = private struct
+define <just class> = struct
 
 // constructor
-define <onCreate> = public static thistype create
-define begin = thistype this = allocate()
-define end = return this
+// define onCreate = public static thistype create
+define onCreate = {
+        public static method create takes nothing returns thistype
+    tt this = allocate()
+}
+
+define end = {
+    return this
+    endmethod
+}
+
+define onCreateCastom = public static thistype create
+define custom = thistype this = allocate()
+define endcustom = return this
 
 define tt = thistype
+
+define <public class> = public struct
 
 // timer data sendedObj
 define sendedObj = data
@@ -180,27 +195,96 @@ define func = function
 
 define addAction(t, f) = TriggerAddAction(t, f)
 
-define printTo(text, gottenPlayer) = DisplayTextToPlayer(gottenPlayer, 0, 0, text)
+define printTo(gottenPlayer, text) = DisplayTextToPlayer(gottenPlayer, 0, 0, text)
 
 define print(text) = BJDebugMsg(text)
+
+// gets
 
 define getCaster = GetSpellAbilityUnit
 define getSpellId = GetSpellAbilityId
 define getOwner = GetOwningPlayer
 
 library swift {
-    void move(unit target, float offset) {
-        float targetFacing = GetUnitFacing(target)
-        float x = GetUnitX(target) + Cos(bj_DEGTORAD * targetFacing) * offset
-        float y = GetUnitY(target) + Sin(bj_DEGTORAD * targetFacing) * offset
-        SetUnitX(target, x)
-        SetUnitY(target, y) 
+    void moveForward(unit target, float offset) {
+        float angle = GetUnitFacing(target)
+        SetUnitX(target, GetUnitX(target) + Cos(bj_DEGTORAD * angle) * offset)
+        SetUnitY(target, GetUnitY(target) + Sin(bj_DEGTORAD * angle) * offset)    
+    }
+}
+
+just class Math {
+    public static float root(float gottenNumber) { return SquareRoot(gottenNumber) }
+}
+
+just class Distance {
+    float min, cur, max, period
+
+    onCreateCustom(float gottenMin, float gottenMax, float gottenPeriod) {
+        custom
+        min = gottenMin
+        cur = min
+        max = gottenMax
+        period = gottenPeriod
+        endcustom
+    }
+}
+
+just class Vector2 {
+    float x, y
+
+    public float length() { return Math.root((x * x) + (y * y)) }
+    public void norm() {
+        float m = Math.root(length())
+        x /= m
+        y /= m
     }
 
-    void moveAt(unit target, float x, float y) {
-        SetUnitX(target, x)
-        SetUnitY(target, y)
+    public void plus(Vector2 gottenVector) {
+        x += gottenVector.x
+        y += gottenVector.y
     }
+
+    public void multiply(float times) {
+        x *= times
+        y *= times
+    }
+    
+    public static Vector2 getFromPoints(float ax, float ay, float bx, float by) {
+        Vector2 v = Vector2.cast()
+        v.x = bx - ax
+        v.y = by - ay
+        return v
+    }
+
+    public static Vector2 getFromUnits(unit a, unit b) {
+        Vector2 v = Vector2.cast()
+        v.x = getX(b) - getX(a)
+        v.y = getY(b) - getY(a)
+        return v
+    }
+
+    public static Vector2 getFromUnitPoint(unit target, float x, float y) {
+        Vector2 v = Vector2.cast()
+        v.x = x - getX(target)
+        v.y = y - getY(target)
+        return v
+    }
+
+    public static void move(unit target, float speed, Vector2 dir) {
+        moveAt(target, getX(target) + dir.x, getY(target) + dir.y)
+    }
+}
+
+
+define moveToward(target, offset, angle) = {
+    SetUnitX(target, GetUnitX(target) + Cos(bj_DEGTORAD * angle) * offset)
+    SetUnitY(target, GetUnitY(target) + Sin(bj_DEGTORAD * angle) * offset)
+}
+
+define moveAt(target, x, y) = {
+    SetUnitX(target, x)
+    SetUnitY(target, y)
 }
 
 define damage(source, target, damageAmount) = UnitDamageTarget(source, target, damageAmount, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
