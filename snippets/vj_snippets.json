@@ -93,6 +93,12 @@
 		"description": "scope",
 		"scope": "source.vjass"
     },
+    "init": {
+		"prefix": "init",
+		"body": "init {\n\t\n}\n}",
+		"description": "scope",
+		"scope": "source.vjass"
+    },
     "library": {
 		"prefix": "library",
 		"body": "library ${1:LibName} fast {\n\tinit {\n\t\n\t}\n}",

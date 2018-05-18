@@ -6381,7 +6381,24 @@ exports.cjfunctions = {
     newTrigger: {
         completion: "fast newTrigger takes nothing returns nothing",
         completion: "библиотека fast, функция создает триггер",
-        description: "",
+    },
+    newUnitTrigger: {
+        completion: "fast newTrigger takes nothing returns nothing",
+        completion: "библиотека fast, функция принимает trigger targetTrigger, unitevent event, func action",
+        parameter: [
+            { label: 'trigger', name: 'targetTrigger' },
+            { label: 'unitevent', name: 'event' },
+            { label: 'func', name: 'action' }
+        ]
+    },
+    newSingleUnitTrigger: {
+        completion: "fast newTrigger takes nothing returns nothing",
+        completion: "библиотека fast, функция принимает trigger targetTrigger, unitsingleevent event, func action",
+        parameter: [
+            { label: 'trigger', name: 'targetTrigger' },
+            { label: 'unitsingleevent', name: 'event' },
+            { label: 'func', name: 'action' }
+        ]
     },
     newGroup: {
         completion: "функция создает группу",
