@@ -6385,26 +6385,89 @@ exports.cjfunctions = {
       ],
     
     },
-    newTrigger: {
-        completion: "fast newTrigger takes nothing returns nothing",
-        completion: "библиотека fast, функция создает триггер",
+    newEvent: {
+        completion: "fast newEvent takes nothing returns nothing",
+        completion: "библиотека fast, функция создает ивент",
     },
-    newUnitTrigger: {
-        completion: "fast newTrigger takes nothing returns nothing",
-        completion: "библиотека fast, функция принимает trigger targetTrigger, unitevent event, func action",
+    newUnitEvent: {
+        completion: "библиотека fast, функция принимает unitevent event, func action и возвращает event",
         parameter: [
-            { label: 'trigger', name: 'targetTrigger' },
             { label: 'unitevent', name: 'event' },
             { label: 'func', name: 'action' }
         ]
     },
-    newSingleUnitTrigger: {
-        completion: "fast newTrigger takes nothing returns nothing",
-        completion: "библиотека fast, функция принимает trigger targetTrigger, unitsingleevent event, func action",
+    newSingleUnitEvent: {
+        completion: "библиотека fast, функция принимает unitevent event, unit whoWillTriggerEvent, func action и возвращает event",
         parameter: [
-            { label: 'trigger', name: 'targetTrigger' },
-            { label: 'unitsingleevent', name: 'event' },
+            { label: 'unitevent', name: 'event' },
+            { label: 'unit', name: 'whoWillTriggerEvent' },
             { label: 'func', name: 'action' }
+        ]
+    },
+    newTimeEvent: {
+        completion: "библиотека fast, функция принимает float время_до_запуска, bool переодичский_ли_таймер?, func action и возвращает event",
+        parameter: [
+            { label: 'float', name: 'timeBeforeStart' },
+            { label: 'bool', name: 'isPeriodic' },
+            { label: 'func', name: 'action' }
+        ]
+    },
+    newPlayerEvent: {
+        completion: "библиотека fast, функция принимает playerevent ивент_игрока, player игрок, func action и возвращает event",
+        parameter: [
+            { label: 'playerevent', name: 'player_event' },
+            { label: 'player', name: 'toWhichPlayerItWorks' },
+            { label: 'func', name: 'action' }
+        ]
+    },
+    setAngle: {
+        completion: "библиотека fast, функция принимает unit какому_юниту, float какой угл",
+        parameter: [
+            { label: 'unit', name: 'whichUnit' },
+            { label: 'angle', name: 'whichAngle' },
+        ]
+    },
+    getAngle: {
+        completion: "библиотека fast, функция принимает unit какого_юнита и возращает float угол_поворота_юнита",
+        parameter: [
+            { label: 'unit', name: 'whichUnit' },
+        ]
+    },
+    root: {
+        completion: "библиотека fast, функция принимает float исходное_число и возращает корень_от_числа",
+        parameter: [
+            { label: 'float', name: 'originNumber' },
+        ]
+    },
+    angleBetweenPoins: {
+        completion: "библиотека fast, функция принимает float ax, float ay и float bx, float by, возвращает угол между ними",
+        parameter: [
+            { label: 'float', name: 'ax' },
+            { label: 'float', name: 'ay' },
+            { label: 'float', name: 'bx' },
+            { label: 'float', name: 'by' },
+        ]
+    },
+    angleBetweenUnitPoint: {
+        completion: "библиотека fast, функция принимает unit который_юнит и float x, float y, возвращает угол между ними",
+        parameter: [
+            { label: 'unit', name: 'targetUnit' },
+            { label: 'float', name: 'x' },
+            { label: 'float', name: 'y' },
+        ]
+    },
+    angleBetweenUnits: {
+        completion: "библиотека fast, функция принимает unit юнит1 и unit юнит2, возвращает угол между ними",
+        parameter: [
+            { label: 'unit', name: 'юнит1' },
+            { label: 'unit', name: 'юнит2' },
+        ]
+    },
+    copyGroup: {
+        completion: "библиотека fast, функция принимает group группа_которую_копируем, group новая_скопированная_группа",
+        parameter: [
+            { label: 'group', name: 'groupToCopy' },
+            { label: 'group', name: 'destinationGroup' },
         ]
     },
     newGroup: {
@@ -6427,7 +6490,7 @@ exports.cjfunctions = {
         completion: "функция принимает unit кого_надо_убрать_из_выбора",
         description: "",
     },
-    cast: {
+    create: {
         completion: "cast spell",
         completion: "создает объект и вызывает метод onCreate",
         description: "",

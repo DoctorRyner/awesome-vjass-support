@@ -115,8 +115,16 @@ endlibrary
 include "cj_types_priv.j"
 include "cj_antibj_base.j"
 
+define event = trigger
+
 define class = private struct
 define <just class> = struct
+define <public class> = public struct
+
+setdef <void> = private nothing
+define <just void> = nothing
+define <public void> = public nothing
+define <public static void> = public static nothing
 
 // constructor
 // define onCreate = public static thistype create
@@ -130,7 +138,7 @@ define end = {
     endmethod
 }
 
-define onCreateCastom = public static thistype create
+define onCreateCustom = public static thistype create
 define custom = thistype this = allocate()
 define endcustom = return this
 
@@ -160,29 +168,45 @@ define with = requires
 
 define fast = initializer onInit
 
-define init = private void onInit()
+define init = void onInit()
 
 define str = string
-
-define cast = create
+define flo = float
+define flt = float
 
 define EVENT_UNIT_USED_SPELL = EVENT_PLAYER_UNIT_SPELL_EFFECT
 
 // trigger
 
-define newUnitTrigger(t, event, action) = { 
-    trigger t = CreateTrigger()
-    TriggerRegisterAnyUnitEventBJ(t, event)
-    TriggerAddAction(t, action)
+event newUnitEvent(playerunitevent gottenEvent, code action) {
+    event e = newEvent()
+    TriggerRegisterAnyUnitEventBJ(e, gottenEvent)
+    TriggerAddAction(e, action)
+    return e
 }
 
-define newSingleUnitTrigger(t, event, action) = { 
-    trigger t = CreateTrigger()
-    TriggerRegisterUnitEvent(t, event)
-    TriggerAddAction(t, action)
+event newSingleUnitEvent(unitevent gottenEvent, unit gottenUnit, code action) {
+    event e = newEvent()
+    TriggerRegisterUnitEvent(e, gottenUnit, gottenEvent)
+    TriggerAddAction(e, action)
+    return e
 }
 
-//define newTrigger = CreateTrigger
+event newTimeEvent(float time, bool isPeriodic) {
+    event e = newEvent()
+    TriggerRegisterTimerEvent(e, time, isPeriodic)
+    return e
+}
+
+event newPlayerEvent(player gottenPlayer, playerevent gottenPlayerEvent) {
+    event e = newEvent()
+    TriggerRegisterPlayerEvent(e, gottenPlayer, gottenPlayerEvent)
+    return e
+}
+
+define GroupAddGroup = copyGroup
+
+define newEvent = CreateTrigger
 define newGroup = CreateGroup
 define getX = GetUnitX
 define getY = GetUnitY
@@ -198,6 +222,9 @@ define addAction(t, f) = TriggerAddAction(t, f)
 define printTo(gottenPlayer, text) = DisplayTextToPlayer(gottenPlayer, 0, 0, text)
 
 define print(text) = BJDebugMsg(text)
+
+define setAngle = SetUnitFacing
+define getAngle = GetUnitFacing
 
 // gets
 
@@ -215,6 +242,12 @@ library swift {
 
 just class Math {
     public static float root(float gottenNumber) { return SquareRoot(gottenNumber) }
+
+    public static float angleBetweenPoints(float ax, float ay, float bx, float by) { return bj_RADTODEG * Atan2(by - ay, bx - ax) }
+
+    public static float angleBetweenUnitPoint(unit target, float x, float y) { return bj_RADTODEG * Atan2(getY(target) - y, getX(target) - x) }
+
+    public static float angleBetweenUnits(unit a, unit b) { return bj_RADTODEG * Atan2(getY(b) - getY(a), getX(b) - getX(a)) }
 }
 
 just class Distance {
@@ -251,21 +284,21 @@ just class Vector2 {
     }
     
     public static Vector2 getFromPoints(float ax, float ay, float bx, float by) {
-        Vector2 v = Vector2.cast()
+        Vector2 v = Vector2.create()
         v.x = bx - ax
         v.y = by - ay
         return v
     }
 
     public static Vector2 getFromUnits(unit a, unit b) {
-        Vector2 v = Vector2.cast()
+        Vector2 v = Vector2.create()
         v.x = getX(b) - getX(a)
         v.y = getY(b) - getY(a)
         return v
     }
 
     public static Vector2 getFromUnitPoint(unit target, float x, float y) {
-        Vector2 v = Vector2.cast()
+        Vector2 v = Vector2.create()
         v.x = x - getX(target)
         v.y = y - getY(target)
         return v

@@ -87,6 +87,12 @@
 		"description": "function",
 		"scope": "source.vjass"
     },
+    "pvoid": {
+		"prefix": "pvoid",
+		"body": "pvoid ${1:privateFuncName}() {\n\t\n}",
+		"description": "function",
+		"scope": "source.vjass"
+    },
     "scope": {
 		"prefix": "scope",
 		"body": "scope ${1:ScopeName} fast {\n\tinit {\n\t\t\n\t}\n}",
