@@ -25,10 +25,10 @@ scope Leaks fast {
 
     function HandleCounter_Actions takes nothing returns nothing
         set HandleBoard = CreateLeaderboard()
-        call LeaderboardSetLabel(HandleBoard, "Handle Counter")
+        call LeaderboardSetLabel(HandleBoard, "Leaks")
         call PlayerSetLeaderboard(GetLocalPlayer(),HandleBoard)
         call LeaderboardDisplay(HandleBoard,true)
-        call LeaderboardAddItem(HandleBoard,"Handles",0,Player(0))
+        call LeaderboardAddItem(HandleBoard,":",0,Player(0))
         call LeaderboardSetSizeByItemCount(HandleBoard,1)
         call HandleCounter_Update()
         call TimerStart(GetExpiredTimer(),0.05,true,function HandleCounter_Update)
