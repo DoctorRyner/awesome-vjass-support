@@ -143,7 +143,7 @@
     },
     "class": {
         "prefix": "class",
-        "body": "class ${1:ClassName} {\n\tonCreate() {\n\t\tbegin\n\t\t\n\t\tend\n\t}\n}",
+        "body": "class ${1:ClassName} {\n\tonCreate\n\t\t\n\tend}}",
         "description": "class",
         "scope": "source.vjass"
     },

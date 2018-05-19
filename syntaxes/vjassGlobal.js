@@ -3136,7 +3136,6 @@ exports.cjfunctions = {
             { label: 'real', name: 'y', documentation: "real variables can hold rational numbers" },
             { label: 'real', name: 'face', documentation: "real variables can hold rational numbers" },
       ],
-    
     },
     CreateUnitByName: {
         completion: "native CreateUnitByName takes player whichPlayer, string unitname, real x, real y, real face returns unit",
@@ -6334,6 +6333,7 @@ exports.cjfunctions = {
         ],
     },
     moveToward: {
+        description: "",
         completion: "fast moveToward takes unit target, float offset, float angle returns nothing",
         completion: "библиотека fast, функция принимает unit перемещаемый_юнит, float смешение, float угол направления",
         parameters: [
@@ -6388,9 +6388,11 @@ exports.cjfunctions = {
     newEvent: {
         completion: "fast newEvent takes nothing returns nothing",
         completion: "библиотека fast, функция создает ивент",
+        description: "",
     },
     newUnitEvent: {
         completion: "библиотека fast, функция принимает unitevent event, func action и возвращает event",
+        description: "",
         parameter: [
             { label: 'unitevent', name: 'event' },
             { label: 'func', name: 'action' }
@@ -6398,14 +6400,20 @@ exports.cjfunctions = {
     },
     newSingleUnitEvent: {
         completion: "библиотека fast, функция принимает unitevent event, unit whoWillTriggerEvent, func action и возвращает event",
+        description: "",
         parameter: [
             { label: 'unitevent', name: 'event' },
             { label: 'unit', name: 'whoWillTriggerEvent' },
             { label: 'func', name: 'action' }
         ]
     },
+    newTimer: {
+        completion: "библиотека fast, создает таймер",
+        description: "",
+    },
     newTimeEvent: {
         completion: "библиотека fast, функция принимает float время_до_запуска, bool переодичский_ли_таймер?, func action и возвращает event",
+        description: "",
         parameter: [
             { label: 'float', name: 'timeBeforeStart' },
             { label: 'bool', name: 'isPeriodic' },
@@ -6413,6 +6421,7 @@ exports.cjfunctions = {
         ]
     },
     newPlayerEvent: {
+        description: "",
         completion: "библиотека fast, функция принимает playerevent ивент_игрока, player игрок, func action и возвращает event",
         parameter: [
             { label: 'playerevent', name: 'player_event' },
@@ -6421,6 +6430,7 @@ exports.cjfunctions = {
         ]
     },
     setAngle: {
+        description: "",
         completion: "библиотека fast, функция принимает unit какому_юниту, float какой угл",
         parameter: [
             { label: 'unit', name: 'whichUnit' },
@@ -6428,18 +6438,21 @@ exports.cjfunctions = {
         ]
     },
     getAngle: {
+        description: "",
         completion: "библиотека fast, функция принимает unit какого_юнита и возращает float угол_поворота_юнита",
         parameter: [
             { label: 'unit', name: 'whichUnit' },
         ]
     },
     root: {
+        description: "",
         completion: "библиотека fast, функция принимает float исходное_число и возращает корень_от_числа",
         parameter: [
             { label: 'float', name: 'originNumber' },
         ]
     },
     angleBetweenPoins: {
+        description: "",
         completion: "библиотека fast, функция принимает float ax, float ay и float bx, float by, возвращает угол между ними",
         parameter: [
             { label: 'float', name: 'ax' },
@@ -6449,6 +6462,7 @@ exports.cjfunctions = {
         ]
     },
     angleBetweenUnitPoint: {
+        description: "",
         completion: "библиотека fast, функция принимает unit который_юнит и float x, float y, возвращает угол между ними",
         parameter: [
             { label: 'unit', name: 'targetUnit' },
@@ -6457,6 +6471,7 @@ exports.cjfunctions = {
         ]
     },
     angleBetweenUnits: {
+        description: "",
         completion: "библиотека fast, функция принимает unit юнит1 и unit юнит2, возвращает угол между ними",
         parameter: [
             { label: 'unit', name: 'юнит1' },
@@ -6464,6 +6479,7 @@ exports.cjfunctions = {
         ]
     },
     copyGroup: {
+        description: "",
         completion: "библиотека fast, функция принимает group группа_которую_копируем, group новая_скопированная_группа",
         parameter: [
             { label: 'group', name: 'groupToCopy' },
@@ -6471,36 +6487,131 @@ exports.cjfunctions = {
         ]
     },
     newGroup: {
+        description: "",
         completion: "функция создает группу",
         description: "",
     },
     getX: {
+        description: "",
         completion: "функция принимает unit чью_координату_х_надо_взять и возвращает float полученная_координата_x",
         description: "",
     },
     getY: {
+        description: "",
         completion: "функция принимает unit чью_координату_y_надо_взять и возвращает float полученная_координата_y",
         description: "",
     },
     select: {
+        description: "",
         completion: "функция принимает unit кого_надо_выбрать",
         description: "",
     },
     unselect: {
+        description: "",
         completion: "функция принимает unit кого_надо_убрать_из_выбора",
         description: "",
     },
     create: {
+        description: "",
         completion: "cast spell",
         completion: "создает объект и вызывает метод onCreate",
         description: "",
     },
     getCaster: {
-        completion: "getCaster",
+        description: "",
         completion: "получаем кастера примененной в триггере способности",
         description: "",
     },
+    getTarget: {
+        completion: "получаем того на кого мы юзнули спелл",
+        description: "",
+    },
+    getSpellX: {
+        completion: "получаем точку x куда мы навели спелл",
+        description: "",
+    },
+    getSpellY: {
+        completion: "получаем точку y куда мы навели спелл",
+        description: "",
+    },
+    getState: {
+        completion: "библиотека fast, принимает unit чья_характеристика, unitstate тип_характеристики",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'whichUnit' },
+            { label: 'unitstate', name: 'whichState' },
+        ],
+    },
+    setState: {
+        description: "",
+        completion: "библиотека fast, принимает unit кому_установить, unitstate тип_характеристики, float значение",
+        parameters: [
+            { label: 'unit', name: 'whichUnit' },
+            { label: 'unitstate', name: 'whichState' },
+            { label: 'float', name: 'value' },
+        ],
+    },
+    startTimer: {
+        description: "",
+        completion: "библиотека fast, принимает timer какой_таймер, float через_сколько_сработает, bool периодичный_ли?, func функция",
+        parameters: [
+            { label: 'timer', name: 'whichTimer' },
+            { label: 'float', name: 'timeout' },
+            { label: 'bool', name: 'isPeriodic?' },
+            { label: 'func', name: 'whichFun?' },
+        ],
+    },
+    setObjToSend: {
+        description: "",
+        completion: "библиотека fast, принимает obj какой объект послать",
+        parameters: [
+            { label: 'timer', name: 'whichTimer' },
+            { label: 'obj', name: 'whichObj' },
+        ],
+    },
+    getTimer: {
+        description: "",
+        completion: "библиотека fast, принимает timer который_таймер",
+        parameters: [
+            { label: 'unit', name: 'whichTimer' },
+        ],
+    },
+    runTimer: {
+        description: "",
+        completion: "библиотека fast, принимает float время_до_срабатывания, bool переодичный_ли_таймер?, func функция для запуска",
+        parameters: [
+            { label: 'float', name: 'timeout' },
+            { label: 'bool', name: 'isPeriodic?' },
+            { label: 'func', name: 'funcToStart' },
+        ],
+    },
+    runTimerNamed: {
+        description: "",
+        completion: "библиотека fast, принимает varname имя_таймера float время_до_срабатывания, bool переодичный_ли_таймер?, func функция для запуска",
+        parameters: [
+            { label: 'varname', name: 'variableName' },
+            { label: 'float', name: 'timeout' },
+            { label: 'bool', name: 'isPeriodic?' },
+            { label: 'func', name: 'funcToStart' },
+        ],
+    },
+    stopTimer: {
+        description: "",
+        completion: "библиотека fast, останавливает таймер",
+    },
+    newUnit: {
+        completion: "библиотека fast, создает юнита и берет player игрок_кому_он_будет_принадлежать, int id_юнита, float x, float y, float угол_поворота и возвращает unit созданный_юнит",
+        description: "",
+        parameters: [
+            { label: 'player', name: 'owner'},
+            { label: 'int', name: 'unitid' },
+            { label: 'float', name: 'x' },
+            { label: 'float', name: 'y' },
+            { label: 'float', name: 'angle' },
+      ],
+    },
     getSpellId: {
+        description: "",
         completion: "получаем id примененной в триггере способности",
         description: "",
     },
@@ -16089,6 +16200,9 @@ exports.keywords = {
     just: { description: "" },
     private: { description: "" },
     static: { description: "" },
+    vstatic: { description: "" },
+    stopTimer: { description: "" },
+    catchTimerObj: { description: "" },
     defaults: { description: "" },
     operator: { description: "" },
     debug: { description: "" },
