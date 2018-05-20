@@ -278,6 +278,20 @@ endlibrary
 
 // MAIN
 
+// def_bools
+
+define STUN_ID = 851973
+
+define isEnemy = IsUnitEnemy
+
+just bool isDead(unit target) { return getState(target, UNIT_STATE_LIFE) <= 0 }
+
+// enddef_bools
+
+define addAllInRangeToGroup(groupa, x, y, radius) = GroupEnumUnitsInRange(groupa, x, y, radius, null)
+
+define setTrans(target, trans) = SetUnitVertexColor(target, 255, 255, 255,  PercentTo255(trans))
+
 // def_timer
 
 define newTimer = NewTimer
@@ -335,6 +349,10 @@ define <public class> = public struct
 
 setdef <void> = private nothing
 define <just void> = nothing
+define <just bool> = bool
+define <just int> = int
+define <just float> = float
+define <just string> = string
 define <public void> = public nothing
 define <public static void> = public static nothing
 define <static void> = private static nothing
@@ -450,13 +468,10 @@ define getSpellY = GetSpellTargetY
 define getState = GetUnitState
 define setState = SetUnitState
 
-library swift {
-    just void moveForward(unit target, float offset) {
-        float angle = GetUnitFacing(target)
-        SetUnitX(target, GetUnitX(target) + Cos(bj_DEGTORAD * angle) * offset)
-        SetUnitY(target, GetUnitY(target) + Sin(bj_DEGTORAD * angle) * offset)    
-    }
-    float TIME_STD = 0.025
+just void moveForward(unit target, float offset) {
+    float angle = GetUnitFacing(target)
+    SetUnitX(target, GetUnitX(target) + Cos(bj_DEGTORAD * angle) * offset)
+    SetUnitY(target, GetUnitY(target) + Sin(bj_DEGTORAD * angle) * offset)    
 }
 
 just class Math {
@@ -464,20 +479,42 @@ just class Math {
 
     public static float angleBetweenPoints(float ax, float ay, float bx, float by) { return bj_RADTODEG * Atan2(by - ay, bx - ax) }
 
-    public static float angleBetweenUnitPoint(unit target, float x, float y) { return bj_RADTODEG * Atan2(getY(target) - y, getX(target) - x) }
+    public static float angleBetweenUnitPoint(unit target, float x, float y) { return bj_RADTODEG * Atan2(y - getY(target), x - getX(target) ) }
 
     public static float angleBetweenUnits(unit a, unit b) { return bj_RADTODEG * Atan2(getY(b) - getY(a), getX(b) - getX(a)) }
+    public static float distanceBetweenPoints(float x1, real y1, real x2, real y2) {
+        return SquareRoot(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)))
+    }
+
+    public static float distanceBetweenUnits(unit unit1, unit unit2) {
+        return SquareRoot(((getX(unit2) - getX(unit1)) * (getX(unit2) - getX(unit1))) + ((getY(unit2) - getY(unit1)) * (getY(unit2) - getY(unit1))))
+    }
+
+    public static float distanceBetweenUnitPoint(unit target, float x, float y) {
+        return SquareRoot(((x - getX(target)) * (x - getX(target))) + ((y - getY(target)) * (y - getY(target))))
+    }
+
+    public static float moveForwardX(unit target, float offset) { return GetUnitX(target) + Cos(bj_DEGTORAD * getAngle(target)) * offset }
+    public static float moveForwardY(unit target, float offset) { return GetUnitY(target) + Sin(bj_DEGTORAD * getAngle(target)) * offset }
+
+    public static float moveTowardX(unit target, float offset, float angle) {
+        return GetUnitX(target) + Cos(bj_DEGTORAD * angle) * offset
+    }
+    public static float moveTowardY(unit target, float offset, float angle) {
+        return GetUnitY(target) + Sin(bj_DEGTORAD * angle) * offset
+    }
+    
 }
 
 just class Distance {
-    float min, cur, max, period
+    public float min, cur, max, speed
 
-    onCreateCustom(float gottenMin, float gottenMax, float gottenPeriod) {
+    onCreateCustom(float gottenMin, float gottenMax, float gottenSpeed) {
         custom
         min = gottenMin
         cur = min
         max = gottenMax
-        period = gottenPeriod
+        speed = gottenSpeed
         endcustom
     }
 }

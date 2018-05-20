@@ -1227,6 +1227,17 @@ exports.cjfunctions = {
       ],
     
     },
+    addAllInRangeToGroup: {
+        completion: "библиотека fast, принимает group в_какую_группу_ддобавить, float x, float y, float в_каком_радиусе",
+        description: "",
+        parameters: [
+            { label: 'group', name: 'whichGroup', documentation: "a collection of units" },
+            { label: 'float', name: 'x', documentation: "real variables can hold rational numbers" },
+            { label: 'float', name: 'y', documentation: "real variables can hold rational numbers" },
+            { label: 'float', name: 'radius', documentation: "real variables can hold rational numbers" },
+      ],
+    
+    },
     GroupEnumUnitsInRangeOfLoc: {
         completion: "native GroupEnumUnitsInRangeOfLoc takes group whichGroup, location whichLocation, real radius, boolexpr filter returns nothing",
         description: "",
@@ -6321,6 +6332,40 @@ exports.cjfunctions = {
             { label: 'float', name: 'offset', documentation: "смещение в юнитах" },
         ],
     },
+    moveForwardX: {
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит, float смещение_в_юнитах и возвращает float x, нужна для определения координаты x при смещении от юнита вперед",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'offset', documentation: "смещение в юнитах" },
+        ],
+    },
+    moveForwardY: {
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит, float смещение_в_юнитах и возвращает float y, нужна для определения координаты x при смещении от юнита вперед",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'offset', documentation: "смещение в юнитах" },
+        ],
+    },
+    moveTowardX: {
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит, float смещение_в_юнитах, float угол_направления и возвращает float x, нужна для определения координаты x при смещении от юнита к направлению угла",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'offset', documentation: "смещение в юнитах" },
+            { label: 'float', name: 'angle' },
+        ],
+    },
+    moveTowardY: {
+        completion: "библиотека fast, функция принимает unit перемещаемый_юнит, float смещение_в_юнитах, float угол_направления и возвращает float y, нужна для определения координаты x при смещении от юнита к направлению угла",
+        description: "",
+        parameters: [
+            { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
+            { label: 'float', name: 'offset', documentation: "смещение в юнитах" },
+            { label: 'float', name: 'angle' },
+        ],
+    },
 
     moveAt: {
         completion: "fast moveAt takes unit target, float x, float y returns nothing",
@@ -6340,6 +6385,33 @@ exports.cjfunctions = {
             { label: 'unit', name: 'target', documentation: "перемещаемый юнит" },
             { label: 'float', name: 'offset', documentation: "смещение" },
             { label: 'float', name: 'angle', documentation: "угол направления" },
+        ],
+    },
+    distanceBetweenPoints: {
+        description: "",
+        completion: "библиотека fast, функция расчитывает расстояние между точками, принимает float x1, float y1, float x2, float y2",
+        parameters: [
+            { label: 'float', name: 'x1' },
+            { label: 'float', name: 'y1' },
+            { label: 'float', name: 'x2' },
+            { label: 'float', name: 'y2' },
+        ],
+    },
+    distanceBetweenUnitPoint: {
+        description: "",
+        completion: "библиотека fast, функция расчитывает расстояние между юнитом и точкой, принимает unit от_какого_юнита, float x, float y",
+        parameters: [
+            { label: 'unit', name: 'fromWhichUnit' },
+            { label: 'float', name: 'x2' },
+            { label: 'float', name: 'y2' },
+        ],
+    },
+    distanceBetweenUnits: {
+        description: "",
+        completion: "библиотека fast, функция расчитывает расстояние между юнитами, принимает unit от_какого_юнита, unit до_какого_юнита",
+        parameters: [
+            { label: 'unit', name: 'fromWhichUnit' },
+            { label: 'unit', name: 'toDestinationUnit' },
         ],
     },
     damage: {
@@ -6389,6 +6461,14 @@ exports.cjfunctions = {
         completion: "fast newEvent takes nothing returns nothing",
         completion: "библиотека fast, функция создает ивент",
         description: "",
+    },
+    setTrans: {
+        completion: "библиотека fast, функция принимает unit какому_юниту и int прозрачность",
+        description: "",
+        parameter: [
+            { label: 'unit', name: 'whichUnit' },
+            { label: 'int', name: 'trans' }
+        ]
     },
     newUnitEvent: {
         completion: "библиотека fast, функция принимает unitevent event, func action и возвращает event",
@@ -6551,6 +6631,23 @@ exports.cjfunctions = {
             { label: 'float', name: 'value' },
         ],
     },
+    isEnemy: {
+        description: "",
+        completion: "библиотека fast, принимает unit какой_юнит, player для_какого_игрока, используем если хотим узнать враг ли юнит для игрока",
+        parameters: [
+            { label: 'unit', name: 'whichUnit' },
+            { label: 'player', name: 'toWhichPlayer' },
+        ],
+    },
+    isDead: {
+        description: "",
+        completion: "библиотека fast, принимает unit какой_юнит, используем если хотим узнать мертвый юнит или нет",
+        parameters: [
+            { label: 'unit', name: 'whichUnit' },
+            { label: 'player', name: 'toWhichPlayer' },
+        ],
+    },
+
     startTimer: {
         description: "",
         completion: "библиотека fast, принимает timer какой_таймер, float через_сколько_сработает, bool периодичный_ли?, func функция",
